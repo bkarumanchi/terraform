@@ -1,0 +1,21 @@
+import json
+import boto3
+
+def lambda_handler(event, context):
+    client = boto3.client('ec2')
+    response_authorize_security_group_ingress = client.authorize_security_group_ingress(
+            GroupId='sg-0b53666155e64cef5',
+            IpPermissions=[
+                {
+                    'FromPort': 80,
+                    'IpProtocol': 'TCP',
+                    'IpRanges': [
+                        {
+                            'CidrIp': '10.20.0.0/16'
+                        },
+                        ],
+                    'ToPort': 80,
+                }
+            ]
+        )
+        #print('Successfully Failed Over to DR Region AD DNS Servers')
